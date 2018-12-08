@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 
 
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends Controller
 {
     /**
-     * @Route("/login", name="login_page")
+     * @Route("/login", name="security_login")
      */
     public function login(Request $request)
     {
@@ -23,7 +25,25 @@ class SecurityController extends Controller
      */
     public function register(Request $request)
     {
-        return $this->render('security/register.html.twig');
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if($form->isSubmitted())
+        {
+            if($user->getPassword() !== $user->getRPassword())
+            {
+                return $this->render('security/register.html.twig', array('error' => "The passwords dont match!"));
+            }
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($password);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute("security_login");
+        }
+        return $this->render("security/register.html.twig");
     }
 
     /**
