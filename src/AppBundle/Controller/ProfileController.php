@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ico
- * Date: 09/12/2018
- * Time: 10:00 AM
- */
-
 namespace AppBundle\Controller;
 
 
-class ProfileController
-{
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
+class ProfileController extends Controller
+{
+    /**
+     * @Route("profile", name="your_profile")
+     */
+    public function yourProfile()
+    {
+        return $this->render("profile/yourProfile.html.twig");
+    }
 }

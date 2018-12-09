@@ -53,4 +53,12 @@ class SecurityController extends Controller
     {
         return $this->render('security/forgotPassword.html.twig');
     }
+
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logout()
+    {
+
+    }
 }

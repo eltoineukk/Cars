@@ -18,11 +18,19 @@
                 <nav class="navbar navbar-inverse p-3 bg-warning text-dark col-sm-12">
                     <div class="container-fluid">
                         <div class="navbar-header">
+                            {% if app.user %}
+                            <a class="navbar-brand" href="{{ path('your_profile') }}">The cars. A game of new generation</a>
+                            {% else %}
                             <a class="navbar-brand" href="{{ path('home_page') }}">The cars. A game of new generation</a>
+                            {% endif %}
                         </div>
                         <ul class="nav navbar-nav navbar-right">
+                            {% if app.user %}
+                            <li><a href="{{ path('security_logout') }}"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
+                            {% else %}
                             <li><a href="{{ path('register_page') }}"><span class="glyphicon glyphicon-user"></span>Register</a></li>
                             <li><a href="{{ path('security_login') }}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>

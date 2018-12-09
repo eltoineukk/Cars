@@ -74,18 +74,6 @@ sensio_framework_extra:
    router:
         annotations: false
 
-fos_user:
-    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
-    firewall_name: main
-    user_class: AppBundle\Entity\User
-    registration:
-        confirmation:
-            enabled: true
-    from_email:
-        address:        noreply@example.com
-        sender_name:    Demo App
-    service:
-        mailer: fos_user.mailer.twig_swift
 swiftmailer:
     transport: gmail
     username:  '%mailer_user%'
