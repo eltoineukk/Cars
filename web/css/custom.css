@@ -4,3 +4,12 @@
 #headCar {
     height: 220px;
 }
+
+#customTable {
+    border: 2px;
+}
+
+#profilePic {
+    width: 650px;
+    height: 400px;
+}

@@ -1,4 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="row">
+        <div class="col-sm-3">
+            {% if app.user %}
+            <ul>
+                <li><a href="{{ path('your_profile') }}">Profile</a></li>
+                <li><a href="yourProfile.html.twig">Work</a></li>
+                <li><a href="yourProfile.html.twig">Settings</a></li>
+            </ul>
+            {% endif %}
+        </div>
+        <div class="col-sm-9">
+            {% if message is defined %}
+            <p class="alert-success">{{ message }}</p>
+            {% endif %}
+            <table class="table-bordered table">
+                <tr>
+                    <th class="text-center">Level</th>
+                    {% if app.user %}
+                    <th class="text-center">$</th>
+                    {% endif %}
+                    <th class="text-center">Fame</th>
+                    <th class="text-center">Speed</th>
+                    <th class="text-center">Handling</th>
+                    <th class="text-center">Acceleration</th>
+                </tr>
+                <tr>
+                    <td class="text-center">{{ user.level }}</td>
+                    {% if app.user %}
+                    <td class="text-center">{{ user.money }}$</td>
+                    {% endif %}
+                    <td class="text-center">{{ user.fame }}</td>
+                    <td class="text-center">{{ user.speed }}</td>
+                    <td class="text-center">{{ user.handling }}</td>
+                    <td class="text-center">{{ user.acceleration }}</td>
+                </tr>
+                {% if app.user %}
+                <tr>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><a href="#" class="btn-danger btn"><strong>+</strong> (cost 22$)</a></td>
+                    <td class="text-center"><a href="#" class="btn-danger btn"><strong>+</strong> (cost 22$)</a></td>
+                    <td class="text-center"><a href="#" class="btn-danger btn"><strong>+</strong> (cost 22$)</a></td>
+                </tr>
+                {% endif %}
+            </table>
+            <img id="profilePic" src="{{ asset('systemImages/Header.png') }}"/>
+        </div>
+    </div>
 {% endblock %}

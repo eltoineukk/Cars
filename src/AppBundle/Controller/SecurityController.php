@@ -15,13 +15,15 @@ class SecurityController extends Controller
     /**
      * @Route("/login", name="security_login")
      */
-    public function login(Request $request)
+    public function login()
     {
         return $this->render('security/login.html.twig');
     }
 
     /**
      * @Route("/register", name="register_page")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function register(Request $request)
     {
@@ -30,7 +32,9 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted())
         {
-            if($user->getPassword() !== $user->getRPassword())
+            //dump($form->getData());
+            //exit;
+            if($user->getPassword() !== $user->getrPassword())
             {
                 return $this->render('security/register.html.twig', array('error' => "The passwords dont match!"));
             }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -58,15 +59,69 @@ class User implements UserInterface
     private $isDeleted;
 
     /**
+     * @var int
+     * @ORM\Column(name="level", type="integer", nullable=false)
+     */
+    private $level;
+
+    /**
+     * @var int
+     * @ORM\Column(name="money", type="integer", nullable=false)
+     */
+    private $money;
+
+    /**
+     * @var int
+     * @ORM\Column(name="fame", type="integer", nullable=false)
+     */
+    private $fame;
+
+    /**
+     * @var int
+     * @ORM\Column(name="speed", type="integer", nullable=false)
+     */
+    private $speed;
+
+    /**
+     * @var int
+     * @ORM\Column(name="acceleration", type="integer", nullable=false)
+     */
+    private $acceleration;
+
+    /**
+     * @var int
+     * @ORM\Column(name="handling", type="integer", nullable=false)
+     */
+    private $handling;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="UserProfileVisit", mappedBy="user")
+     */
+    private $visitors;
+
+
+
+    /**
      * @var bool
      */
     private $terms;
 
-    private $rPassword;
+    /**
+     * @var string
+     */
+    public $rPassword;
 
     public function __construct()
     {
         $this->setDateOnRegister(new \DateTime('now'));
+        $this->level = 1;
+        $this->money = 0;
+        $this->fame = 1;
+        $this->speed = 5;
+        $this->acceleration = 5;
+        $this->handling = 5;
+        $this->visitors = [];
     }
 
     /**
@@ -213,10 +268,103 @@ class User implements UserInterface
         return $this->rPassword;
     }
 
-    public function setRPassword($password)
+    /**
+     * @return int
+     */
+    public function getLevel()
     {
-        $this->rPassword = $password;
+        return $this->level;
     }
+
+    /**
+     * @param int $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMoney()
+    {
+        return $this->money;
+    }
+
+    /**
+     * @param int $money
+     */
+    public function setMoney($money)
+    {
+        $this->money = $money;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFame()
+    {
+        return $this->fame;
+    }
+
+    /**
+     * @param int $fame
+     */
+    public function setFame($fame)
+    {
+        $this->fame = $fame;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSpeed()
+    {
+        return $this->speed;
+    }
+
+    /**
+     * @param int $speed
+     */
+    public function setSpeed($speed)
+    {
+        $this->speed = $speed;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAcceleration()
+    {
+        return $this->acceleration;
+    }
+
+    /**
+     * @param int $acceleration
+     */
+    public function setAcceleration($acceleration)
+    {
+        $this->acceleration = $acceleration;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHandling()
+    {
+        return $this->handling;
+    }
+
+    /**
+     * @param int $handling
+     */
+    public function setHandling($handling)
+    {
+        $this->handling = $handling;
+    }
+
+
 
     /**
      * Returns the roles granted to the user.
