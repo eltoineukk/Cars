@@ -1,0 +1,4 @@
+eltoineu 12-12-2018
+
+1. Fixed grammar on some pages
+2. Changed dollar sign position (11$ --> $11) as it should be
